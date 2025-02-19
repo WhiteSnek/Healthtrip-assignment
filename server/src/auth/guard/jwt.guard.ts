@@ -17,10 +17,10 @@ export class JwtGuard extends AuthGuard('jwt') {
     const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
 
     // Extract token from cookies
-    const token = request.cookies['access_token'];
-    if (token) {
-      request.headers['authorization'] = `Bearer ${token}`;
-    }
+    // const token = request.cookies['access_token'] || request.headers['authorization'];
+    // if (token) {
+    //   request.headers['authorization'] = `Bearer ${token}`;
+    // }
 
     const isAuthenticated = (await super.canActivate(context)) as boolean;
     if (!isAuthenticated) return false;
