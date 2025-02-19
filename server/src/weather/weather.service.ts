@@ -22,7 +22,7 @@ export class WeatherService {
     try {
       const weatherUrl = `${this.weatherBaseUrl}/forecast.json?q=${city}&days=7&key=${this.weatherApiKey}`;
       const response = await firstValueFrom(this.httpService.get(weatherUrl));
-      const { location, forecast } = response.data; // Extract relevant data
+      const { location, forecast } = response.data; 
 
       return {
         city: location.name,
@@ -50,7 +50,6 @@ export class WeatherService {
   async getAqi(city: string) {
     try {
       const aqiUrl = `${this.aqiBaseUrl}/${city}/?token=${this.aqiToken}`;
-      console.log(aqiUrl);
       const response = await firstValueFrom(this.httpService.get(aqiUrl));
       const data = response.data;
 
