@@ -15,7 +15,7 @@ export interface User {
 }
 
 function App() {
-  axios.defaults.baseURL = 'http://localhost:3000';
+  axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
