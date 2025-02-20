@@ -2,6 +2,7 @@ import { ExecutionContext, Injectable, UnauthorizedException, ForbiddenException
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ROLE, STATUS } from '@prisma/client';
 
 interface AuthenticatedRequest extends Request {
   user?: { id: string }; 
@@ -15,7 +16,11 @@ export class AdminGuard extends AuthGuard('jwt') {
 
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
-
+    
+    const token = request.cookies['access_token'] || request.headers['authorization'];
+    if (token) {
+      request.headers['authorization'] = `Bearer ${token}`;
+    }
     // Authenticate user
     const isAuthenticated = (await super.canActivate(context)) as boolean;
     if (!isAuthenticated) return false;
@@ -35,11 +40,11 @@ export class AdminGuard extends AuthGuard('jwt') {
       throw new UnauthorizedException('User not found');
     }
 
-    if (dbUser.status !== 'ACTIVE') {
+    if (dbUser.status !== STATUS.ACTIVE) {
       throw new UnauthorizedException('Your account is not active');
     }
 
-    if (dbUser.role !== 'ADMIN') {
+    if (dbUser.role !== ROLE.ADMIN) {
       throw new ForbiddenException('You do not have permission to access this resource');
     }
 

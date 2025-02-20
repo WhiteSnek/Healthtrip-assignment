@@ -4,6 +4,7 @@ import {
   import { ConfigService } from '@nestjs/config';
   import { PrismaService } from 'src/prisma/prisma.service';
   import { JwtService } from '@nestjs/jwt';
+import { ROLE } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -38,5 +39,21 @@ export class AuthService {
           access_token,
           refresh_token,
         };
+      }
+
+      async assignRoles(role: ROLE, userId: string){
+        try {
+          const user = await this.prisma.user.update({
+            where: {
+              id: userId
+            },
+            data: {
+              role: role
+            }
+          })
+          return user
+        } catch (error) {
+          console.log(error)
+        }
       }
 }

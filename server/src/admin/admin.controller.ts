@@ -7,8 +7,8 @@ import { AdminService } from './admin.service';
 export class AdminController {
     constructor(private readonly adminService: AdminService) {}
     @Patch(':userId')
-    async deactivateUser(@Param('userId') userId: string) {
-        return this.adminService.deactivateUser(userId)
+    async toggleUserStatus(@Param('userId') userId: string) {
+        return this.adminService.toggleUserStatus(userId)
     }
 
     @Get('')
