@@ -5,10 +5,11 @@ import { RequestWithUser } from './types/request_with_user';
 import { Response } from 'express';
 import { GetUser } from './decorator';
 import { ROLE, User } from '@prisma/client';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService, private readonly configService: ConfigService) {}
 
   @Get('google')
   @UseGuards(GoogleAuthGuard)
@@ -39,7 +40,7 @@ export class AuthController {
       secure: false,
       sameSite: 'lax',
     });
-    return res.redirect('http://localhost:5173');
+    return res.redirect(this.configService.get('CORS_ORIGIN'));
   }
   @UseGuards(JwtGuard)
   @Get('user')
