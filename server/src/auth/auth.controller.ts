@@ -32,13 +32,13 @@ export class AuthController {
     res.cookie('access_token', access_token, {
       httpOnly: true,
       secure: true,
-      sameSite: 'None',
+      sameSite: 'none',
     });
 
     res.cookie('refresh_token', refresh_token, {
       httpOnly: true,
       secure: true,
-      sameSite: 'None',
+      sameSite: 'none',
     });
     return res.redirect(this.configService.get('CORS_ORIGIN'));
   }
