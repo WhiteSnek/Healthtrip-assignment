@@ -46,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, setUser, setError }) => {
   }, [setUser, setError]);
   
   return (
-    <nav className="flex fixed w-screen justify-between items-center p-4 shadow-md bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200 transition-all duration-300">
+    <nav className="flex z-50 fixed w-screen justify-between items-center p-4 shadow-md bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200 transition-all duration-300">
       <div className="text-2xl font-bold text-gray-800 dark:text-gray-300 tracking-wide">
         WeatherApp
       </div>

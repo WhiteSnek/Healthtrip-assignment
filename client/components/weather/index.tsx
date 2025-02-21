@@ -90,7 +90,7 @@ const WeatherDisplay: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-300 dark:bg-gray-800 p-4 md:p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-300 dark:bg-gray-800 py-25 px-10 sm:p-6">
       <div className="w-full max-w-4xl p-6 md:p-8 bg-white/90 dark:bg-gray-900/90 rounded-xl shadow-xl backdrop-blur-md">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
           <div className="flex items-center gap-2">

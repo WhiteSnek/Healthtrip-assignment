@@ -14,6 +14,7 @@ export interface User {
   role: string;
 }
 
+
 function App() {
   axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
   const [user, setUser] = useState<User | null>(null);
